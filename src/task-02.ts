@@ -21,6 +21,12 @@ const to = await select ({
     choices
 })
 
+if (from === to) {
+    console.log("Mata uang asal dan tujuan sama, tidak perlu dikonversi.")
+    process.exit(0)
+}
+
+
 const amount = await number({ 
     message: "Masukan jumlah uangnya",
     required: true,
@@ -30,3 +36,4 @@ const amount = await number({
 
 const converted = currencyConverter(amount!, from, to)
 
+console.log(`${amount} ${from} = ${converted.toFixed(4)} ${to}`)
