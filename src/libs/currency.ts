@@ -2,12 +2,10 @@
 // Buat acuan mata uang dulu trus export 
 const rates = { 
     USD: 1, 
-    IDR: 16_000,
+    IDR: 16000,
     EUR: 0.9,
     JPY: 150,
 }
-
-
 export type Currency = keyof typeof rates
 
 export function currencyConverter(amount: number, from: Currency, to: Currency): number {
@@ -15,4 +13,4 @@ export function currencyConverter(amount: number, from: Currency, to: Currency):
     return amountInUsd * rates[to];
 }
 
-console.log(currencyConverter(1600000, "IDR", "USD"));
+

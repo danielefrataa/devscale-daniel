@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun run ./src/task-01.ts",
+    "dev:02": "bun run ./src/task-02.ts",
+    "dev:03": "bun run ./src/task-03.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

@@ -13,12 +13,12 @@ export const questions : Question[] = [
     {
         question: "Ibu kota dari Indonesia!?",
         choices: ["Jakarta", "Bandung", "Surabaya", "Medan"],
-        answer: 1
+        answer: 0
     },
     {
         question: "Ibu kota dari malaysia apa hayo!?",
         choices: ["Johor Bahru", "Penang", "Kuala Lumpur", "Putrajaya"],
-        answer: 1
+        answer: 2
     },
     {
         question: "Ibu kota dari zambia apa hayo!?",

@@ -1,6 +1,6 @@
-// Body Mass Index: Berat Badan / Tinggi Badan m2  
+// Revisi dari Devscale
 import {number, select} from '@inquirer/prompts'
-import {BodyMassMetrik} from './libs/bmi'
+import {BodyMassMetrik, BodyMassImperial} from './libs/bmi'
 
 const beratBadan = await select ({ 
     message: "Pilih Satuan", 
@@ -10,35 +10,41 @@ const beratBadan = await select ({
     ]
 })
 
+const isImperial = beratBadan === "Imperial";
+
+const weightMessage = isImperial ? 'Weight (lb)': 'Weight (Kg)'
+const heightMessage = isImperial ? 'Height (Inch)' : 'Height(Cm)'
+
+
 const weight = await number ({ 
-    message: 'Berat Badan (kg)',
-    required: true, 
-    validate: (value) => (value > 0 && value !== undefined)
+    message: weightMessage,
+    required: true
 })
 
 
 const height = await number ({ 
-    message: 'Tinggi Badan (cm)',
-    required: true, 
-    validate: (value) => (value !== undefined && value > 0)
+    message: heightMessage,
+    required: true
 })
 
-
-const result = BodyMassMetrik(weight, height)
-const rounded = Math.round(result * 10) / 10
-
-console.log(`Body Mass Kamu ${rounded}`);
-
-
-if (rounded < 20) { 
-    console.log("Body mass indeks kamu sudah sangat bagus");
-    
-} else { 
-    console.log("Bisa di latih kembali");
-    
+if (weight === undefined || height === undefined) {
+  console.log("Input tidak valid.");
+  process.exit(1);
 }
 
+const result =
+  beratBadan === "Metric"
+    ? BodyMassMetrik(weight, height)
+    : BodyMassImperial(weight, height);
+const rounded = Math.round(result * 10) / 10;
 
-
-
-
+console.log(`Body Mass Kamu ${rounded}`);
+if (rounded < 18.5) {
+  console.log("Kategori: Kurus (Underweight)");
+} else if (rounded < 25) {
+  console.log("Kategori: Normal (Sangat bagus!)");
+} else if (rounded < 30) {
+  console.log("Kategori: Gemuk (Overweight)");
+} else {
+  console.log("Kategori: Obesitas");
+}
